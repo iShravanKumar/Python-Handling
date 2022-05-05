@@ -87,10 +87,10 @@ class TestGenerate(unittest.TestCase):
 
     def test_delete(self):
         try:
-            del_conn, unused = self.crud.establish_connection('shravan', 'Vvu8z9D')
+            # del_conn, unused = self.crud.establish_connection('shravan', 'Vvu8z9D')
             value = 1
             command = f"DELETE FROM {self.test_db}.{self.test_table} WHERE ID={value}"
-            check = self.crud.delete_rows(del_conn, self.test_db, self.test_table, command)
+            check = self.crud.delete_rows(self.conn, self.test_db, self.test_table, command)
             self.assertEqual(check, True)
             command = f"SELECT * FROM {self.test_db}.{self.test_table} WHERE ID={value}"
             cursor = self.conn.cursor()

@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect
 import pandas
-# from database_handler import CRUD
+from database_handler import CRUD
 import mysql.connector
 
 app = Flask(__name__)
@@ -39,19 +39,20 @@ def upload():
             database_cursor.execute(command, tuple(rows))
             mydb.commit()
 
-        return redirect("/index")
+        return redirect("/view")
     return render_template("Upload.html")
 
 
-'''@app.route('/view')
+@app.route('/view')
 def table():
     mydb = mysql.connector.connect(host="localhost", user="shravan", password="Vvu8z9D")
     database_cursor = mydb.cursor()
     database_cursor.execute("SELECT * FROM fakestore.flask_data")
     result = database_cursor.fetchall()
+    result_list = []
     for x in result:
-        print(x)
-    return render_template('fake_store.html', htmlList=list(result))'''
+        result_list.append(list(x))
+    return render_template('fake_store.html', htmlList=result_list)
 
 
 if __name__ == "__main__":
